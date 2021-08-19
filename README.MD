@@ -40,3 +40,7 @@ traffic there.
 
 Run something on the host that tails the output from BPF trace (for example, my [hello
 world eBPF beginners examples](https://github.com/lizrice/libbpfgo-beginners))
+
+## IP addresses
+
+The IP addresses for the client, load balancer and two backends are hard-coded at the top of the .c file. You'll likely need to change these to match the addresses assigned to the containers you run.
