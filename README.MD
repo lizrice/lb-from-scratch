@@ -42,6 +42,11 @@ Run something on the host that tails the output from BPF trace (for example, my 
 world eBPF beginners examples](https://github.com/lizrice/libbpfgo-beginners))
 or just `sudo cat /sys/kernel/debug/tracing/trace_pipe`
 
+### IP addresses
+
+The IP addresses for the client, load balancer and two backends are hard-coded at the top of the .c file. You'll likely need to change these to match the addresses assigned to the containers you run.
+
+
 ## Packet drop - ping demo 
 
 Install ping utils into the ubuntu-working container 
@@ -71,5 +76,4 @@ Tracing:  `cat /sys/kernel/debug/tracing/trace_pipe` on host
 Listen with `nc -l 80`
 Curl from host with `curl -v 172.17.0.2` (use verbose to see the response even
 if it's not valid HTML) 
-
 
