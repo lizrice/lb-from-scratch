@@ -1,4 +1,10 @@
-# An eBPF Load Balancer from scratch
+# Network-related demos
+
+* Load Balancer from Scratch 
+* Packetdrop 
+* Packet counting
+
+## An eBPF Load Balancer from scratch
 
 As seen at [eBPF Summit 2021](https://ebpf.io/summit-2021). This is not production ready :-) 
 
@@ -77,3 +83,6 @@ Listen with `nc -l 80`
 Curl from host with `curl -v 172.17.0.2` (use verbose to see the response even
 if it's not valid HTML) 
 
+## xdp_liz
+
+Counts packets! 
