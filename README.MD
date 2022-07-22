@@ -21,6 +21,8 @@ an `ubuntu` container and adding dependencies so that it can compile the eBPF co
 sudo apt install clang llvm libelf-dev libpcap-dev gcc-multilib build-essential make
 ```
 
+*Note: gcc-multilib is not currently available for ARM architectures on Ubuntu 22.04. I'm adding `/usr/include/$(shell uname -m)-linux-gnu` into the include path instead. See [this thread for more info](https://patchwork.ozlabs.org/project/netdev/patch/20200311123421.3634-1-tklauser@distanz.ch/).*
+
 Save this image off with `docker commit <running container> ubuntu-working`.
 Running it as privileged gives it permissions to load eBPF programs: 
 
