@@ -75,6 +75,11 @@ Save off into an image called ubuntu-pingbox: `docker commit <running container>
 docker run --rm -it -v ~/ebpf-net-beginners:/ebpf-net-beginners --privileged -h pingbox --name pingbox --env TERM=xterm-color ubuntu-pingbox
 ```
 
+Or use the version I pushed to Docker Hub
+```bash
+docker run --rm -it -v ~/lb-from-scratch:/lb-from-scratch --privileged -h pingbox --env TERM=xterm-color lizrice/ubuntu-pingbox
+```
+
 Find its ip address (`ip a` from inside, or `docker inspect pingbox`)
 
 Check you can ping it from outside.
