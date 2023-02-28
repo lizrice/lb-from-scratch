@@ -13,24 +13,31 @@ This uses `libbpf` as a git submodule. If you clone this repo you'll need to run
 
 ## Load Balancer container
 
-In my demo I'm running all the components as containers. For the Load Balancer
-component itself I created an image locally by running
-an `ubuntu` container and adding dependencies so that it can compile the eBPF code: 
+In my demo I'm running all the components as containers. 
+
+For the Load Balancer component itself you can build a Docker image from Dockerfile.lb, which starts from 
+an `ubuntu` container with additional dependencies so that it can compile the eBPF code. 
+
+```
+docker buildx create --name mybuilder --bootstrap --use
+docker buildx build --push --platform linux/arm64,linux/amd64 --tag lizrice/ubuntu-ebpf-lb -f Dockerfile.lb .
+```
 
 ```bash
-sudo apt install clang llvm libelf-dev libpcap-dev gcc-multilib build-essential make
+sudo apt install clang llvm libelf-dev libpcap-dev gcc-multilib build-essential make linux-tools-common
 ```
 
 *Note: gcc-multilib is not currently available for ARM architectures on Ubuntu 22.04. I'm adding `/usr/include/$(shell uname -m)-linux-gnu` into the include path instead. See [this thread for more info](https://patchwork.ozlabs.org/project/netdev/patch/20200311123421.3634-1-tklauser@distanz.ch/).*
 
-Save this image off with `docker commit <running container> ubuntu-working`.
+My version of this container image is available at `lizrice/ubuntu-ebpf-lb`.
+
 Running it as privileged gives it permissions to load eBPF programs: 
 
 ```bash
-docker run --rm -it -v ~/ebpf-net-beginners:/ebpf-net-beginners --privileged -h lb --name lb --env TERM=xterm-color ubuntu-working
+docker run --rm -it -v ~/lb-from-scratch:/lb-from-scratch --privileged -h lb --name lb --env TERM=xterm-color lizrice/ubuntu-ebpf-lb
 ```
 
-Exec into that container, `cd ebpf-net-beginners` and then `make` should build and
+Exec into that container, `cd lb-from-scratch` and then `make` should build and
 install the load balancer onto the eth0 interface for that container. 
 
 ## Demo containers
