@@ -1,0 +1,4 @@
+FROM ubuntu:jammy
+RUN apt-get update
+RUN apt-get install -y clang llvm libelf-dev libpcap-dev build-essential make 
+RUN apt-get install -y linux-tools-common
